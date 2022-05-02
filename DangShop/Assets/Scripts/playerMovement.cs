@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class playerMovement : MonoBehaviour
@@ -7,17 +5,17 @@ public class playerMovement : MonoBehaviour
     public float speed = 5f;
     public Camera cam;
     float pickRange = 2f;
-    private Gun weapon;
+    private Gun _weapon;
     Bottle bottle;
     public GameObject mk;
     playerStats heal;
     [SerializeField] private AudioClip startRunning;
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
 
     private void Start()
     {
         heal = gameObject.GetComponent<playerStats>();
-        audioSource = gameObject.GetComponent<AudioSource>();
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
 
@@ -30,19 +28,19 @@ public class playerMovement : MonoBehaviour
     {
         if (Input.GetKey("w"))
         {
-            transform.position += transform.forward * speed * Time.deltaTime;
+            transform.position += transform.forward * (speed * Time.deltaTime);
         }
         if (Input.GetKey("a"))
         {
-            transform.position += transform.right * -speed * Time.deltaTime;
+            transform.position += transform.right * (-speed * Time.deltaTime);
         }
         if (Input.GetKey("s"))
         {
-            transform.position += transform.forward * -speed * Time.deltaTime;
+            transform.position += transform.forward * (-speed * Time.deltaTime);
         }
         if (Input.GetKey("d"))
         {
-            transform.position += transform.right * speed * Time.deltaTime;
+            transform.position += transform.right * (speed * Time.deltaTime);
         }
         if (Input.GetKeyDown("e"))
         {
@@ -50,16 +48,16 @@ public class playerMovement : MonoBehaviour
             Physics.Raycast(cam.transform.position, cam.transform.forward, out obj, pickRange);
             try
             {
-                weapon = obj.transform.GetComponent<Gun>();
+                _weapon = obj.transform.GetComponent<Gun>();
                 bottle = obj.transform.GetComponent<Bottle>();
             }
             catch (System.NullReferenceException e)
             {
 
             }
-            if (weapon != null)
+            if (_weapon != null)
             {
-                weapon.PickedUp();
+                _weapon.PickedUp();
             }
             if(bottle != null)
             {
@@ -74,11 +72,11 @@ public class playerMovement : MonoBehaviour
                 StartCoroutine(heal.Heal());
             }
         }
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             speed = 9f;
-            audioSource.Stop();
-            audioSource.Play();
+            _audioSource.Stop();
+            _audioSource.Play();
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {

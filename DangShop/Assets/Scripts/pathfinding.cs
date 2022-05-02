@@ -5,14 +5,14 @@ using UnityEngine.AI;
 
 public class pathfinding : MonoBehaviour
 {
-    private NavMeshAgent navMeshAgent;
+    private NavMeshAgent _navMeshAgent;
     public Transform player;
     private void Awake()
     {
-        navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        _navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
     }
     private void Update()
     {
-        navMeshAgent.destination = player.position;
+        _navMeshAgent.destination = player.position;
     }
 }

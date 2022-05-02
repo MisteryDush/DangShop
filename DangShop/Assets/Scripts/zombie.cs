@@ -92,12 +92,12 @@ public class zombie : MonoBehaviour
             StartCoroutine(Wait());
         }
         dead = true;
-        foreach(Rigidbody rig in _rigs)
+        foreach(var rig in _rigs)
         {
             rig.isKinematic = _setRagdoll;
         }
 
-        foreach(Collider col in _cols)
+        foreach(var col in _cols)
         {
             col.enabled = _setCollider;
         }     

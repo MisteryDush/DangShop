@@ -22,12 +22,12 @@ public class playerDetection : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.transform.name);
-        if (other.transform.tag == "Player")
+        if (other.transform.CompareTag("Player"))
         {
             RaycastHit hit;
             Physics.Raycast(transform.parent.position, dir, out hit, 100f , ~ignore);
             Debug.Log(hit.transform.gameObject.layer +" " + hit.transform.name);
-            if(hit.transform.tag == "Player")
+            if(hit.transform.CompareTag("Player"))
             {
                 gameObject.transform.GetComponentInParent<zombie>().playerDetected = true;
                 
